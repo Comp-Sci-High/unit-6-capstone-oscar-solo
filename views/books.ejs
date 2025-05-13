@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reading Tracker</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <h1>Advisory Reading Tracker</h1>
+
+  <div class="card-container">
+    <% for(let i = 0; i < books.length; i++){ %>
+      <div class="card">
+        <img src="<%= books[i].cover %>" alt="Book Cover" />
+        <h2><%= books[i].title %></h2>
+        <p>Pages Read: <%= books[i].pagesRead %></p> 
+          <p><%= books[i].totalPages %></p>
+
+        <div class="button-wrapper">
+  
+          <form onsubmit="editBook(event, '<%= books[i]._id %>')">
+            <input name="pagesRead" type="number" min="0" max="<%= books[i].totalPages %>" placeholder="New pages read"  required />
+            <button type="submit">Update Progress</button>
+          </form>
+
+          
+          <button onclick="deleteBook('<%= books[i]._id %>')">Delete</button>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>

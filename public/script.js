@@ -26,3 +26,25 @@ async function deleteBook(bookId) {
   await res.json();
   window.location.href = "/";
 }
+
+ async function editBook(event, bookId) {
+  event.preventDefault();
+
+  const form = event.target;
+  const formData = new FormData(form);
+
+  const body = {
+    pagesRead: Number(formData.get("pagesRead")),
+    completed: formData.has("completed")
+  };
+
+  const res = await fetch(`/update/${bookId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+
+  await res.json();
+  window.location.href = "/";
+}
+

@@ -1,35 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Reading Tracker</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advisory Reading Tracker</title>
+  <link rel="stylesheet" href="/style.css" />
   <script src="/script.js" defer></script>
 </head>
 <body>
-  <h1>Advisory Reading Tracker</h1>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/5b328976aa49a1b7b46b89c3/1530039440176-O24B7OCR4WPIAI62JZTW/CompSci.High_Circle_Logo.png?format=750w" alt="School Logo" />
+    </div>
+    <div class="nav-links">
+      <a href="/">Reading Tracker</a>
+    </div>
+  </nav>
 
-  <div class="card-container">
-    <% for(let i = 0; i < books.length; i++){ %>
-      <div class="card">
-        <img src="<%= books[i].cover %>" alt="Book Cover" />
-        <h2><%= books[i].title %></h2>
-        <p>Pages Read: <%= books[i].pagesRead %></p> 
-          <p><%= books[i].totalPages %></p>
+  <div class="container">
+    <h1>Advisory Reading Tracker</h1>
 
-        <div class="button-wrapper">
-  
-          <form onsubmit="editBook(event, '<%= books[i]._id %>')">
-            <input name="pagesRead" type="number" min="0" max="<%= books[i].totalPages %>" placeholder="New pages read"  required />
-            <button type="submit">Update Progress</button>
-          </form>
+    <!-- Add Book Form -->
+    <section class="add-book-section">
+      <h2>Add a New Book</h2>
+      <form id="addBookForm">
+        <label for="title">Book Title</label>
+        <input type="text" name="title" id="title" required />
 
-          
-          <button onclick="deleteBook('<%= books[i]._id %>')">Delete</button>
-        </div>
+        <!-- Author field -->
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" required />
+
+        <label for="student">Student Name</label>
+        <input type="text" name="student" id="student" required />
+
+        <!-- Changed 'cover' to 'image' -->
+        <label for="image">Cover Image URL</label>
+        <input type="url" name="image" id="image" required />
+
+        <label for="pagesRead">Pages Read</label>
+        <input type="number" name="pagesRead" id="pagesRead" min="0" value="0" required />
+
+        <label for="totalPages">Total Pages</label>
+        <input type="number" name="totalPages" id="totalPages" min="1" value="100" required />
+
+        <label for="startDate">Start Date</label>
+        <input type="date" name="startDate" id="startDate" required />
+
+        <label>
+          <input type="checkbox" name="completed" id="completed" />
+          Mark as completed
+        </label>
+
+        <button type="submit">Add Book</button>
+      </form>
+    </section>
+
+    <!-- Books List -->
+    <section class="book-list-section">
+      <div class="card-grid">
+        <% for (let i = 0; i < books.length; i++) { %>
+          <div class="card">
+            <!-- Use image field here -->
+            <img src="<%= books[i].image %>" alt="Book Cover" />
+            <div class="card-content">
+              <h2><%= books[i].title %></h2>
+              <p><strong>Author:</strong> <%= books[i].author %></p>
+              <p><strong>Student:</strong> <%= books[i].student %></p>
+              <p><strong>Pages:</strong> <%= books[i].pagesRead %> / <%= books[i].totalPages %></p>
+              <p><strong>Started:</strong> <%= books[i].startDate.toDateString() %></p>
+              <p><strong>Completed:</strong> <%= books[i].completed ? "✅" : "❌" %></p>
+
+              <form onsubmit="editBook(event, '<%= books[i]._id %>')">
+                <input name="pagesRead" type="number" min="0" max="<%= books[i].totalPages %>" placeholder="New pages read" required />
+                <label>
+                  <input name="completed" type="checkbox" <%= books[i].completed ? "checked" : "" %> />
+                  Mark as completed
+                </label>
+                <button type="submit">Update</button>
+              </form>
+
+              <button onclick="deleteBook('<%= books[i]._id %>')">Delete</button>
+            </div>
+          </div>
+        <% } %>
       </div>
-    <% } %>
+    </section>
   </div>
-
 </body>
 </html>
+

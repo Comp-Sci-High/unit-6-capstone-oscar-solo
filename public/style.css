@@ -1,89 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f7f7f7;
-  }
-  
+  font-family: 'Inter', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #214e34;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: -0.5px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #214e34;
+  font-weight: 600;
+  transition: color 0.3s;
+  font-size: 1rem;
+}
+
+.nav-links a:hover {
+  color: #2e5e42;
+}
+
+/* Grid layout for books */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  align-items: start;
+}
+
+/* Card styling */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* Card content */
+.card-content {
+  width: 100%;
+  text-align: center;
+}
+
+.card-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #214e34;
+  margin-bottom: 12px;
+}
+
+.card-content p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+/* Forms */
+form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form input[type="number"] {
+  padding: 10px;
+  width: 80%;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="number"]:focus {
+  border-color: #497f5a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(33, 78, 52, 0.15);
+}
+
+form label {
+  font-weight: 600;
+  color: #214e34;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+form button {
+  padding: 12px 25px;
+  background-color: #214e34;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+form button:hover {
+  background-color: #2e5e42;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
   h1 {
-    margin-top: 20px;
+    font-size: 2.2rem;
   }
-  
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+
+  .container {
+    padding: 30px 15px;
   }
-  
-  .card {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    width: 220px;
-    padding: 15px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+
+  .card-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .card:hover {
-    transform: scale(1.02);
-  }
-  
-  .card img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-  }
-  
-  .button-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-    gap: 10px;
-  }
-  
-  .update-form,
-  .delete-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .update-form input {
-    width: 80%;
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  button {
-    width: 80%;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .update-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .update-button:hover {
-    background-color: #45a049;
-  }
-  
-  .delete-button {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .delete-button:hover {
-    background-color: #d32f2f;
-  }
-  
+}

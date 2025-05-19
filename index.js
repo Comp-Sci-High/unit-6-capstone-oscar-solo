@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 const express = require("express");
 
@@ -16,10 +17,16 @@ app.use((req, res, next) => {
 
 const bookSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  author: { type: String, reuired: true},
+  student:{ type: String, required: true },
+  startDate: { type: Date, default: Date.now },
+  completed: { type: Boolean, default: false },
+  author: { type: String, required: true },
   pagesRead: { type: Number, default: 0 },
-  totalPages: { type: Number, default: 1000 }
-});
+  totalPages: { type: Number, default: 100 },
+  image: { type: String },
+  },
+  { timestamps: true }
+);
 
 const Book = mongoose.model("Book", bookSchema, "Books");
 
@@ -35,6 +42,7 @@ app.delete("/delete/:_id", async (req, res) => {
   res.json(deleted);
 });
 
+
 app.patch("/update/:_id", async (req, res) => {
   const updated = await Book.findByIdAndUpdate(req.params._id, req.body, { new: true });
   res.json(updated);
@@ -42,9 +50,13 @@ app.patch("/update/:_id", async (req, res) => {
  app.post("/books/save", async (req, res) => {
  const book = await new Book({
  title: req.body.title,
+ student:req.body.student,
+ startDate:req.body.startDate,
+ completed:req.body.completed,
  author: req.body.author,
  pagesRead: req.body.pagesRead,
-  totalPages: req.body.totalPages
+totalPages: req.body.totalPages,
+  image: req.body.image,
 }).save()
    res.json(book);
  });

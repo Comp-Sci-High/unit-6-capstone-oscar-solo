@@ -1,23 +1,28 @@
-console.log("Client-side Javascript");
-// Task 3: Write the delete books function using ID
-async function deleteBook(id) {
-  await fetch('/delete/' + id, { method: 'DELETE' });
-  window.location.href = "/";
-}
-
-
-// Task 6: Write the update student function using ID
-async function editBook(e, id) {
+const form = document.querySelector("form");
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const formData = new FormData(form);
+  const body = Object.fromEntries(formData.entries());
 
-  const formData = new FormData(e.target);
-  const formObject = Object.fromEntries(formData.entries());
+  // handle checkbox manually
+  body.completed = formData.has("completed");
 
-  await fetch('/update/' + id, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formObject)
+  const res = await fetch("/books/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
   });
 
+  const result = await res.json();
+  console.log(result);
+  window.location.href = "/";
+});
+
+async function deleteBook(bookId) {
+  const res = await fetch(`/delete/${bookId}`, {
+    method: "DELETE"
+  });
+
+  await res.json();
   window.location.href = "/";
 }

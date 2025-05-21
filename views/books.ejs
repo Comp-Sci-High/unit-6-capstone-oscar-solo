@@ -76,7 +76,14 @@
               
              <form onsubmit="editBook(event, '<%= books[i]._id %>')">
                 <input name="pagesRead" type="number" min="0" max="<%= books[i].totalPages %>" placeholder="New pages read" required />
-
+              <label>
+               <% if (books[i].completed) { %>
+                <input type="checkbox" name="completed" checked />
+               <% } else { %>
+                <input type="checkbox" name="completed" />
+               <% } %>
+                 Mark as completed
+                 </label>
 
                 <button type="submit">Update</button>
               </form>

@@ -55,8 +55,8 @@ app.patch("/update/:_id", async (req, res) => {
  completed:req.body.completed,
  author: req.body.author,
  pagesRead: req.body.pagesRead,
-totalPages: req.body.totalPages,
-  image: req.body.image,
+ totalPages: req.body.totalPages,
+ image: req.body.image,
 }).save()
    res.json(book);
  });

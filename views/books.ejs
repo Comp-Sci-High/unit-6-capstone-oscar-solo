@@ -28,14 +28,14 @@
         <label for="title">Book Title</label>
         <input type="text" name="title" id="title" required />
 
-        <!-- Author field -->
+       
         <label for="author">Author</label>
         <input type="text" name="author" id="author" required />
 
         <label for="student">Student Name</label>
         <input type="text" name="student" id="student" required />
 
-        <!-- Changed 'cover' to 'image' -->
+       
         <label for="image">Cover Image URL</label>
         <input type="url" name="image" id="image" required />
 
@@ -57,27 +57,27 @@
       </form>
     </section>
 
-    <!-- Books List -->
     <section class="book-list-section">
       <div class="card-grid">
         <% for (let i = 0; i < books.length; i++) { %>
           <div class="card">
-            <!-- Use image field here -->
             <img src="<%= books[i].image %>" alt="Book Cover" />
             <div class="card-content">
-              <h2><%= books[i].title %></h2>
-              <p><strong>Author:</strong> <%= books[i].author %></p>
-              <p><strong>Student:</strong> <%= books[i].student %></p>
-              <p><strong>Pages:</strong> <%= books[i].pagesRead %> / <%= books[i].totalPages %></p>
-              <p><strong>Started:</strong> <%= books[i].startDate.toDateString() %></p>
-              <p><strong>Completed:</strong> <%= books[i].completed ? "✅" : "❌" %></p>
-
-              <form onsubmit="editBook(event, '<%= books[i]._id %>')">
+            <h2><%= books[i].title %></h2>
+            <p>Author: <%= books[i].author %></p>
+            <p>Student: <%= books[i].student %></p>
+            <p>Pages: <%= books[i].pagesRead %>/<%= books[i].totalPages %></p>
+            <p>Started: <%= books[i].startDate.toDateString() %></p> 
+              <% if (books[i].completed) { %>
+               <p>Completed ✅</p>
+               <% } else { %>
+               <p>Not completed ❌</p>
+               <% } %>
+              
+             <form onsubmit="editBook(event, '<%= books[i]._id %>')">
                 <input name="pagesRead" type="number" min="0" max="<%= books[i].totalPages %>" placeholder="New pages read" required />
-                <label>
-                  <input name="completed" type="checkbox" <%= books[i].completed ? "checked" : "" %> />
-                  Mark as completed
-                </label>
+
+
                 <button type="submit">Update</button>
               </form>
 

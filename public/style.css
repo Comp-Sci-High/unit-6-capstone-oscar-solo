@@ -118,19 +118,19 @@ h2 {
 /* Book List Grid */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* ⬅ wider minimum */
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem; /* Increased gap for clearer spacing */
 }
 
 /* Book Card */
 .card {
   background-color: #161b22;
-  border: 1px solid #30363d;
+  border: 2px solid #00ffc3;  /* Changed border width & color */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 255, 195, 0.1);
   transition: transform 0.3s ease;
-  padding: 10px; /* was 15 or 20 */
+  padding: 10px; /* keep your original padding */
 }
 
 
@@ -140,12 +140,15 @@ h2 {
 
 .card img {
   width: 100%;
-  height: 300px;
+  aspect-ratio: 1 / 1; /* keeps square ratio */
   object-fit: cover;
+  border-radius: 6px;
 }
 
+
+
 .card-content {
-  padding: 1rem;
+  padding: 1rem 0 0 0;
 }
 
 .card-content h2 {
@@ -189,9 +192,21 @@ h2 {
   background-color: #1f6feb;
   color: white;
 }
-.card img {
+
+/* Navbar links with borders */
+.nav-links li {
+  display: inline-block;
+  padding: 0 10px;
+  border-right: 1px solid #ccc;
+}
+
+/* Remove border on last nav link */
+.nav-links li:last-child {
+  border-right: none;
+}
+
+img {
+  height: 300px; /* or whatever works best visually */
   width: 100%;
-  height: auto;
-  border-radius: 6px;
-  object-fit: cover;
+  object-fit: cover; /* or 'contain' if you want to see full image */
 }

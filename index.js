@@ -36,6 +36,12 @@ app.get("/", async (req, res) => {
   res.render("books.ejs", { books });
 });
 
+app.get("/list", async (req, res) => {
+  const books = await Book.find({ completed: true }); 
+  res.render("list", { books });
+});
+
+
 
 app.delete("/delete/:_id", async (req, res) => {
   const deleted = await Book.findByIdAndDelete(req.params._id);

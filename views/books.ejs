@@ -74,22 +74,23 @@
                <p>Not completed ❌</p>
                <% } %>
               
-             <form onsubmit="editBook(event, '<%= books[i]._id %>')">
+           <form onsubmit="editBook(event, '<%= books[i]._id %>')">
                 <input name="pagesRead" type="number" min="0" max="<%= books[i].totalPages %>" placeholder="New pages read" required />
               <label>
                <% if (books[i].completed) { %>
                 <input type="checkbox" name="completed" checked />
-               <% } else { %>
+                <% } else { %>
                 <input type="checkbox" name="completed" />
                <% } %>
                  Mark as completed
                  </label>
 
-                <button type="submit">Update</button>
-              </form>
-
-              <button onclick="deleteBook('<%= books[i]._id %>')">Delete</button>
-            </div>
+      <div class="button-row">
+         <button type="submit">Update</button>
+         <button type="button" onclick="deleteBook('<%= books[i]._id %>')">Delete</button>
+         </div>
+     </form>
+         </div>
           </div>
         <% } %>
       </div>
